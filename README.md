@@ -1,37 +1,63 @@
-# fake-ssn-node
+# aamva.js
 
-This is a clone of [**fng-ssn-tools**](https://github.com/corbanworks/fng-ssn-tools) just in node.js
-
-A small library providing one an ability to validate a social security number, 
-find a state where SSN was issued, and generate a fake social security numbers
-for testing your application.
+small helper library that provides one an ability to parse AAMVA magnetic stripe.
+regex was created based on 2012 spec
 
 ## Installation
 
 ```bash
-  npm install ssn -g
+  npm install aamva -g
 ```
 
 ## Usage
 
 ```javascript
   // Generate SSN from random state
-  var ssn = require('ssn');
-  console.log(ssn.generate());
+  var aamva = require('aamva');
 
-  // Generate SSN from state of FL
-  console.log(ssn.generate('FL'));
+  var stripe_data = '%FLDELRAY BEACH^DOE$JOHN$^4818 S FEDERAL BLVD^           \?\
+  ;6360100462172082009=2101198299090=?\
+  #! 33435      I               1600                                   ECCECC00000?';
 
-  // Validate social security
-  if ( ssn.validate('420-19-4933') ) {
-        console.log('valid');
-  } else {
-        console.log('invalid');
-  }
+  var res = aamva.stripe(stripe_data);
+  console.log("DMV ID:",res.id());
+  console.log("First name:",res.name().first);
+  console.log("Last name:",res.name().last);
+  console.log("Middle name:",res.name().middle);
+  console.log("Entire object", res);
 
-  // Get a state where SSN was issued
-  var state = ssn.validate('420-19-4933');
-  console.log('420-19-4933 was issued in', state);
+/* 
+  output: 
+  {
+    state: 'FL',
+    city: 'DELRAYBEACH',
+    name: [
+        Function
+    ],
+    address: '4818SFEDERALBLVD',
+    iso_iin: '636010',
+    dl: '0462172082009',
+    expiration_date: '2101',
+    birthday: '19829909',
+    dl_overflow: '0',
+    cds_version: '#',
+    jurisdiction_version: '!',
+    postal_code: '33435',
+    class: 'I',
+    restrictions: '',
+    endorsments: '',
+    sex: '1',
+    height: '600',
+    weight: '',
+    hair_color: '',
+    eye_color: '',
+    misc: 'ECCECC00000',
+    id: [
+        Function
+    ]
+}
+*/
+
 ```
 
 ## Tests
@@ -46,14 +72,8 @@ If you find a bug or willing to add some enhancement, pull requests are very wel
 
 ## Release History
 
-* 0.0,1 Initial release
-* 0.0.2 Bug fixes
-* 0.0.3 Bug fixes
-* 0.0.4 Added validation
-* 0.5.0 Added tests and documentation
-* 0.5.1 Corrected type in the doc
-* 0.5.2 Updated markdown
-* 0.5.3 fixed bug with random states selection
+* 0.0.1 Initial release
+
 
 ## Legal
 
