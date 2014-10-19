@@ -28,34 +28,28 @@ regex was created based on 2012 spec
 
 /* 
   output: 
-  {
-    state: 'FL',
-    city: 'DELRAYBEACH',
-    name: [
-        Function
-    ],
-    address: '4818SFEDERALBLVD',
-    iso_iin: '636010',
-    dl: '0462172082009',
-    expiration_date: '2101',
-    birthday: '19829909',
-    dl_overflow: '0',
-    cds_version: '#',
-    jurisdiction_version: '!',
-    postal_code: '33435',
-    class: 'I',
-    restrictions: '',
-    endorsments: '',
-    sex: '1',
-    height: '600',
-    weight: '',
-    hair_color: '',
-    eye_color: '',
-    misc: 'ECCECC00000',
-    id: [
-        Function
-    ]
-}
+        { state: 'FL',
+          city: 'DELRAY BEACH',
+          name: [Function],
+          address: '4818 S FEDERAL BLVD',
+          iso_iin: '636010',
+          dl: '0462172082009',
+          expiration_date: '2101',
+          birthday: '19829909',
+          dl_overflow: '0',
+          cds_version: '#',
+          jurisdiction_version: '!',
+          postal_code: '33435      ',
+          class: 'I ',
+          restrictions: '          ',
+          endorsments: '    ',
+          sex: [Function],
+          height: '600',
+          weight: '   ',
+          hair_color: '   ',
+          eye_color: '   ',
+          misc: '                          ECCECC00000',
+          id: [Function] }
 */
 
 ```

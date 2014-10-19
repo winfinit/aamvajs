@@ -31,7 +31,19 @@ module.exports = {
             "class": res3[5],
             "restrictions": res3[6],
             "endorsments": res3[7],
-            "sex": res3[8],
+            "sex": function() {
+                switch(Number(res3[8])) {
+                    case 1:
+                        return "MALE";
+                        break;
+                    case 2:
+                        return "FAMALE";
+                        break;
+                    default:
+                        return "MISSING/INVALID";
+                        break;
+                }
+            },
             "height": res3[9],
             "weight": res3[10],
             "hair_color": res3[11],

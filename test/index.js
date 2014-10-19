@@ -7,6 +7,7 @@ var should = require('chai').should(),
 #! 33435      I               1600                                   ECCECC00000?';
     var stripe = aamva.stripe(data);
 console.log(stripe);
+
 describe('state', function() {
     it('should be set to FL', function(){
     	expect(stripe.state).to.equal("FL");
@@ -14,7 +15,7 @@ describe('state', function() {
 });
 
 describe('city', function() {
-    it('should be set to FL', function(){
+    it('should be set to DELRAY BEACH', function(){
     	expect(stripe.city).to.equal("DELRAY BEACH");
     });
 });
@@ -32,7 +33,19 @@ describe('First name', function() {
 });
 
 describe('Last name', function() {
-    it('should be set to ', function(){
+    it('should be set to DOE', function(){
     	expect(stripe.name().last).to.equal("DOE");
+    });
+});
+
+describe('Address', function() {
+    it('should be set to 4818 S FEDERAL BLVD', function(){
+    	expect(stripe.address).to.equal("4818 S FEDERAL BLVD");
+    });
+});
+
+describe('Sex', function() {
+    it('should be set to MALE', function(){
+    	expect(stripe.sex()).to.equal("MALE");
     });
 });
