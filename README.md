@@ -24,6 +24,7 @@ regex was created based on 2012 spec
   console.log("First name:",res.name().first);
   console.log("Last name:",res.name().last);
   console.log("Middle name:",res.name().middle);
+  console.log("Sex:",res.sex()); /* MALE, FEMALE, MISSING/INVALID */
   console.log("Entire object", res);
 
 /* 
@@ -67,6 +68,7 @@ If you find a bug or willing to add some enhancement, pull requests are very wel
 ## Release History
 
 * 0.0.1 Initial release
+* 0.0.2 changed sex to a function
 
 
 ## Legal

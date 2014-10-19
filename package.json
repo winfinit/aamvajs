@@ -1,6 +1,6 @@
 {
   "name": "aamva",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Parse AAMVA magnetic stripe",
   "main": "index.js",
   "scripts": {
