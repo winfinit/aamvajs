@@ -2,12 +2,10 @@ var should = require('chai').should(),
  	expect = require('chai').expect,
     aamva = require('../index');
 
-    var data = '%FLLAKE WORTH^GUNTHER$WILLIAM$TALMADGE^7317 HEATHLEY DR^                        ?;6360100753693864066=2102196499260=?#! 334677730  E               1603                                   ECCECC00000?';
-//     var data = '%FLDELRAY BEACH^DOE$JOHN$^4818 S FEDERAL BLVD^           \?\
-// ;6360100462172082009=2101198299090=?\
-// #! 33435      I               1600                                   ECCECC00000?';
+    var data = '%FLDELRAY BEACH^DOE$JOHN$^4818 S FEDERAL BLVD^           \?\
+;6360100462172082009=2101198299090=?\
+#! 33435      I               1600                                   ECCECC00000?';
     var stripe = aamva.stripe(data);
-console.log(stripe);
 
 describe('state', function() {
     it('should be set to FL', function(){

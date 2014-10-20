@@ -69,6 +69,7 @@ If you find a bug or willing to add some enhancement, pull requests are very wel
 
 * 0.0.1 Initial release
 * 0.0.2 changed sex to a function
+* 0.0.3 accounted for weird space characters
 
 
 ## Legal
