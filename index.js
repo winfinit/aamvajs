@@ -2,11 +2,15 @@
 module.exports = {
     stripe: function(data) {
         data = data.replace(/\n/, "");
+        // replace spaces with regular space
+        data = data.replace(/\s/g, " ");
         var track = data.match(/(.*?\?)(.*?\?)(.*?\?)/);
         var res1 = track[1].match(/(\%)([A-Z]{2})([^\^]{0,13})\^?([^\^]{0,35})\^?([^\^]{0,29})\^?\s*?\?/);
         var res2 = track[2].match(/(;)(\d{6})(\d{0,13})(\=)(\d{4})(\d{8})(\d{0,5})\=?\?/);
         var res3 = track[3].match(/(\#|\%)(\d|\!)(\d|\s)([0-9A-Z ]{11})([0-9A-Z ]{2})([0-9A-Z ]{10})([0-9A-Z ]{4})([12]{1})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})(.*?)\?/);
+        console.log(track);
         
+        console.log(res3);
         return {
             "state": res1[2],
             "city": res1[3],
