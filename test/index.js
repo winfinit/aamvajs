@@ -5,6 +5,7 @@ var should = require('chai').should(),
     var data = '%FLDELRAY BEACH^DOE$JOHN$^4818 S FEDERAL BLVD^           \?\
 ;6360100462172082009=2101198299090=?\
 #! 33435      I               1600                                   ECCECC00000?';
+
     var stripe = aamva.stripe(data);
 
 describe('state', function() {
