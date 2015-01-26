@@ -25,7 +25,6 @@ module.exports = {
             "iso_iin": res2[2],
             "dl": res2[3],
             "expiration_date": res2[5],
-            "birthday": res2[6],
             "birthday": function() {
                 //19879908
                 var dob = res2[6].match(/(\d{4})(\d{2})(\d{2})/);
