@@ -20,11 +20,12 @@ regex was created based on 2012 spec
   #! 33435      I               1600                                   ECCECC00000?';
 
   var res = aamva.stripe(stripe_data);
-  console.log("DMV ID:",res.id());
-  console.log("First name:",res.name().first);
-  console.log("Last name:",res.name().last);
-  console.log("Middle name:",res.name().middle);
+  console.log("DMV ID:",res.id()); /* D621720820090 */
+  console.log("First name:",res.name().first); /* JOHN */
+  console.log("Last name:",res.name().last); /* DOE */
+  console.log("Middle name:",res.name().middle); /* "" */
   console.log("Sex:",res.sex()); /* MALE, FEMALE, MISSING/INVALID */
+  console.log("DOB:",res.birthday()); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */
   console.log("Entire object", res);
 
 /* 
@@ -36,7 +37,7 @@ regex was created based on 2012 spec
           iso_iin: '636010',
           dl: '0462172082009',
           expiration_date: '2101',
-          birthday: '19829909',
+          birthday: [Function],
           dl_overflow: '0',
           cds_version: '#',
           jurisdiction_version: '!',
@@ -71,6 +72,7 @@ If you find a bug or willing to add some enhancement, pull requests are very wel
 * 0.0.2 changed sex to a function
 * 0.0.3 accounted for weird space characters
 * 0.0.5 removed logging that was left by mistake
+* 0.0.7 inflated birthday to a Date object, and fixed FL AAMVA spec, where expiration month is set to birthday month
 
 
 ## Legal

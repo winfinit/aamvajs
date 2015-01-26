@@ -3,10 +3,11 @@ var should = require('chai').should(),
     aamva = require('../index');
 
     var data = '%FLDELRAY BEACH^DOE$JOHN$^4818 S FEDERAL BLVD^           \?\
-;6360100462172082009=2101198299090=?\
+;6360100462172082009=2101198799080=?\
 #! 33435      I               1600                                   ECCECC00000?';
 
     var stripe = aamva.stripe(data);
+
 
 describe('state', function() {
     it('should be set to FL', function(){
@@ -47,5 +48,13 @@ describe('Address', function() {
 describe('Sex', function() {
     it('should be set to MALE', function(){
     	expect(stripe.sex()).to.equal("MALE");
+    });
+});
+
+describe('DOB', function() {
+    it('should be set to 19870108', function(){
+        var date = new Date(1987,0,8);
+        console.log(stripe.birthday());
+        expect(stripe.birthday().toDateString()).to.equal(date.toDateString());
     });
 });
