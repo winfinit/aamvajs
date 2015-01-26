@@ -1,0 +1,105 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'publish', '-f' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 warn using --force I sure hope you know what you are doing.
+5 verbose publish [ '.' ]
+6 verbose cache add [ '.', null ]
+7 verbose cache add name=undefined spec="." args=[".",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: '.',
+8 verbose parsed url   path: '.',
+8 verbose parsed url   href: '.' }
+9 silly lockFile 3a52ce78- .
+10 verbose lock . /Users/rjurkov/.npm/3a52ce78-.lock
+11 verbose tar pack [ '/Users/rjurkov/.npm/aamva/0.0.7/package.tgz', '.' ]
+12 verbose tarball /Users/rjurkov/.npm/aamva/0.0.7/package.tgz
+13 verbose folder .
+14 info prepublish aamva@0.0.7
+15 silly lockFile 1f1177db-tar tar://.
+16 verbose lock tar://. /Users/rjurkov/.npm/1f1177db-tar.lock
+17 silly lockFile 604520f9-rkov-npm-aamva-0-0-7-package-tgz tar:///Users/rjurkov/.npm/aamva/0.0.7/package.tgz
+18 verbose lock tar:///Users/rjurkov/.npm/aamva/0.0.7/package.tgz /Users/rjurkov/.npm/604520f9-rkov-npm-aamva-0-0-7-package-tgz.lock
+19 silly lockFile 1f1177db-tar tar://.
+20 silly lockFile 1f1177db-tar tar://.
+21 silly lockFile 604520f9-rkov-npm-aamva-0-0-7-package-tgz tar:///Users/rjurkov/.npm/aamva/0.0.7/package.tgz
+22 silly lockFile 604520f9-rkov-npm-aamva-0-0-7-package-tgz tar:///Users/rjurkov/.npm/aamva/0.0.7/package.tgz
+23 silly lockFile e824daf6--rjurkov-npm-aamva-0-0-7-package /Users/rjurkov/.npm/aamva/0.0.7/package
+24 verbose lock /Users/rjurkov/.npm/aamva/0.0.7/package /Users/rjurkov/.npm/e824daf6--rjurkov-npm-aamva-0-0-7-package.lock
+25 silly lockFile e824daf6--rjurkov-npm-aamva-0-0-7-package /Users/rjurkov/.npm/aamva/0.0.7/package
+26 silly lockFile e824daf6--rjurkov-npm-aamva-0-0-7-package /Users/rjurkov/.npm/aamva/0.0.7/package
+27 silly lockFile 3a52ce78- .
+28 silly lockFile 3a52ce78- .
+29 silly publish { name: 'aamva',
+29 silly publish   version: '0.0.7',
+29 silly publish   description: 'Parse AAMVA magnetic stripe',
+29 silly publish   main: 'index.js',
+29 silly publish   scripts: { test: 'make test' },
+29 silly publish   repository: { type: 'git', url: 'https://github.com/winfinit/aamvajs.git' },
+29 silly publish   keywords: [ 'aamva', 'driver', 'license', 'AAMVA', 'AMVA' ],
+29 silly publish   author: { name: 'Roman Jurkov', email: 'winfinit@gmail.com' },
+29 silly publish   license: 'GNU General Public License',
+29 silly publish   bugs: { url: 'https://github.com/winfinit/aamvajs/issues' },
+29 silly publish   dependencies: {},
+29 silly publish   homepage: 'https://github.com/winfinit/aamvajs',
+29 silly publish   devDependencies: { mocha: '^1.21.4', chai: '^1.9.1' },
+29 silly publish   readme: '# aamva.js\n\nsmall helper library that provides one an ability to parse AAMVA magnetic stripe.\nregex was created based on 2012 spec\n\n## Installation\n\n```bash\n  npm install aamva -g\n```\n\n## Usage\n\n```javascript\n  // Generate SSN from random state\n  var aamva = require(\'aamva\');\n\n  var stripe_data = \'%FLDELRAY BEACH^DOE$JOHN$^4818 S FEDERAL BLVD^           \\?\\\n  ;6360100462172082009=2101198299090=?\\\n  #! 33435      I               1600                                   ECCECC00000?\';\n\n  var res = aamva.stripe(stripe_data);\n  console.log("DMV ID:",res.id()); /* D621720820090 */\n  console.log("First name:",res.name().first); /* JOHN */\n  console.log("Last name:",res.name().last); /* DOE */\n  console.log("Middle name:",res.name().middle); /* "" */\n  console.log("Sex:",res.sex()); /* MALE, FEMALE, MISSING/INVALID */\n  console.log("DOB:",res.birthday()); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */\n  console.log("Entire object", res);\n\n/* \n  output: \n        { state: \'FL\',\n          city: \'DELRAY BEACH\',\n          name: [Function],\n          address: \'4818 S FEDERAL BLVD\',\n          iso_iin: \'636010\',\n          dl: \'0462172082009\',\n          expiration_date: \'2101\',\n          birthday: [Function],\n          dl_overflow: \'0\',\n          cds_version: \'#\',\n          jurisdiction_version: \'!\',\n          postal_code: \'33435      \',\n          class: \'I \',\n          restrictions: \'          \',\n          endorsments: \'    \',\n          sex: [Function],\n          height: \'600\',\n          weight: \'   \',\n          hair_color: \'   \',\n          eye_color: \'   \',\n          misc: \'                          ECCECC00000\',\n          id: [Function] }\n*/\n\n```\n\n## Tests\n\n```bash\n  npm test\n```\n\n## Contributing\n\nIf you find a bug or willing to add some enhancement, pull requests are very welcome\n\n## Release History\n\n* 0.0.1 Initial release\n* 0.0.2 changed sex to a function\n* 0.0.3 accounted for weird space characters\n* 0.0.5 removed logging that was left by mistake\n* 0.0.7 inflated birthday to a Date object, and fixed FL AAMVA spec, where expiration month is set to birthday month\n\n\n## Legal\n\nThis program is free software; you can redistribute it and/or\nmodify it under the terms of the GNU General Public License\nas published by the Free Software Foundation; either version 2\nof the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program; if not, write to the Free Software\nFoundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.\n',
+29 silly publish   readmeFilename: 'README.md',
+29 silly publish   gitHead: 'd8cd2959d74b547937cecef83e5b34c869173b08',
+29 silly publish   _id: 'aamva@0.0.7',
+29 silly publish   _shasum: '4a47f080becdd40299a062b20bf1c1af785feb7c',
+29 silly publish   _from: '.' }
+30 verbose request where is /aamva
+31 verbose request registry https://registry.npmjs.org/
+32 verbose request id 44ffd45336478178
+33 verbose url raw /aamva
+34 verbose url resolving [ 'https://registry.npmjs.org/', './aamva' ]
+35 verbose url resolved https://registry.npmjs.org/aamva
+36 verbose request where is https://registry.npmjs.org/aamva
+37 info trying registry request attempt 1 at 14:29:16
+38 http PUT https://registry.npmjs.org/aamva
+39 http 403 https://registry.npmjs.org/aamva
+40 verbose headers { date: 'Mon, 26 Jan 2015 19:29:05 GMT',
+40 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+40 verbose headers   'content-type': 'application/json',
+40 verbose headers   'cache-control': 'max-age=60',
+40 verbose headers   'content-length': '5683',
+40 verbose headers   'accept-ranges': 'bytes',
+40 verbose headers   via: '1.1 varnish',
+40 verbose headers   'x-served-by': 'cache-atl6231-ATL',
+40 verbose headers   'x-cache': 'MISS',
+40 verbose headers   'x-cache-hits': '0',
+40 verbose headers   'x-timer': 'S1422300544.959206,VS0,VE345',
+40 verbose headers   'keep-alive': 'timeout=10, max=50',
+40 verbose headers   connection: 'Keep-Alive' }
+41 error publish Failed PUT 403
+42 error Error: forbidden cannot modify pre-existing version: 0.0.7
+42 error old={"name":"aamva","version":"0.0.7","description":"Parse AAMVA magnetic stripe","main":"index.js","scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/winfinit/aamvajs.git"},"keywords":["aamva","driver","license","AAMVA","AMVA"],"author":{"name":"Roman Jurkov","email":"winfinit@gmail.com"},"license":"GNU General Public License","bugs":{"url":"https://github.com/winfinit/aamvajs/issues"},"dependencies":{},"homepage":"https://github.com/winfinit/aamvajs","devDependencies":{"mocha":"^1.21.4","chai":"^1.9.1"},"gitHead":"d62908f4c1f756aa4804a9095beffa00584fd86e","_id":"aamva@0.0.7","_shasum":"e2c527ac509dee0dde8d22b6d1d1e7937ea22566","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"winfinit","email":"winfinit@gmail.com"},"maintainers":[{"name":"winfinit","email":"winfinit@gmail.com"}],"dist":{"shasum":"e2c527ac509dee0dde8d22b6d1d1e7937ea22566","tarball":"http://registry.npmjs.org/aamva/-/aamva-0.0.7.tgz"}}
+42 error new={"name":"aamva","version":"0.0.7","description":"Parse AAMVA magnetic stripe","main":"index.js","scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/winfinit/aamvajs.git"},"keywords":["aamva","driver","license","AAMVA","AMVA"],"author":{"name":"Roman Jurkov","email":"winfinit@gmail.com"},"license":"GNU General Public License","bugs":{"url":"https://github.com/winfinit/aamvajs/issues"},"dependencies":{},"homepage":"https://github.com/winfinit/aamvajs","devDependencies":{"mocha":"^1.21.4","chai":"^1.9.1"},"readme":"# aamva.js\u000a\u000asmall helper library that provides one an ability to parse AAMVA magnetic stripe.\u000aregex was created based on 2012 spec\u000a\u000a## Installation\u000a\u000a```bash\u000a  npm install aamva -g\u000a```\u000a\u000a## Usage\u000a\u000a```javascript\u000a  // Generate SSN from random state\u000a  var aamva = require('aamva');\u000a\u000a  var stripe_data = '%FLDELRAY BEACH^DOE$JOHN$^4818 S FEDERAL BLVD^           \\?\\\u000a  ;6360100462172082009=2101198299090=?\\\u000a  #! 33435      I               1600                                   ECCECC00000?';\u000a\u000a  var res = aamva.stripe(stripe_data);\u000a  console.log(\"DMV ID:\",res.id()); /* D621720820090 */\u000a  console.log(\"First name:\",res.name().first); /* JOHN */\u000a  console.log(\"Last name:\",res.name().last); /* DOE */\u000a  console.log(\"Middle name:\",res.name().middle); /* \"\" */\u000a  console.log(\"Sex:\",res.sex()); /* MALE, FEMALE, MISSING/INVALID */\u000a  console.log(\"DOB:\",res.birthday()); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */\u000a  console.log(\"Entire object\", res);\u000a\u000a/* \u000a  output: \u000a        { state: 'FL',\u000a          city: 'DELRAY BEACH',\u000a          name: [Function],\u000a          address: '4818 S FEDERAL BLVD',\u000a          iso_iin: '636010',\u000a          dl: '0462172082009',\u000a          expiration_date: '2101',\u000a          birthday: [Function],\u000a          dl_overflow: '0',\u000a          cds_version: '#',\u000a          jurisdiction_version: '!',\u000a          postal_code: '33435      ',\u000a          class: 'I ',\u000a          restrictions: '          ',\u000a          endorsments: '    ',\u000a          sex: [Function],\u000a          height: '600',\u000a          weight: '   ',\u000a          hair_color: '   ',\u000a          eye_color: '   ',\u000a          misc: '                          ECCECC00000',\u000a          id: [Function] }\u000a*/\u000a\u000a```\u000a\u000a## Tests\u000a\u000a```bash\u000a  npm test\u000a```\u000a\u000a## Contributing\u000a\u000aIf you find a bug or willing to add some enhancement, pull requests are very welcome\u000a\u000a## Release History\u000a\u000a* 0.0.1 Initial release\u000a* 0.0.2 changed sex to a function\u000a* 0.0.3 accounted for weird space characters\u000a* 0.0.5 removed logging that was left by mistake\u000a* 0.0.7 inflated birthday to a Date object, and fixed FL AAMVA spec, where expiration month is set to birthday month\u000a\u000a\u000a## Legal\u000a\u000aThis program is free software; you can redistribute it and/or\u000amodify it under the terms of the GNU General Public License\u000aas published by the Free Software Foundation; either version 2\u000aof the License, or (at your option) any later version.\u000a\u000aThis program is distributed in the hope that it will be useful,\u000abut WITHOUT ANY WARRANTY; without even the implied warranty of\u000aMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\u000aGNU General Public License for more details.\u000a\u000aYou should have received a copy of the GNU General Public License\u000aalong with this program; if not, write to the Free Software\u000aFoundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.\u000a","readmeFilename":"README.md","gitHead":"d8cd2959d74b547937cecef83e5b34c869173b08","_id":"aamva@0.0.7","_shasum":"4a47f080becdd40299a062b20bf1c1af785feb7c","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"winfinit","email":"winfinit@gmail.com"},"maintainers":[{"name":"winfinit","email":"winfinit@gmail.com"}],"dist":{"shasum":"4a47f080becdd40299a062b20bf1c1af785feb7c","tarball":"http://registry.npmjs.org/aamva/-/aamva-0.0.7.tgz"}}: aamva
+42 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
+42 error     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
+42 error     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:236:22)
+42 error     at Request.emit (events.js:98:17)
+42 error     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1142:14)
+42 error     at Request.emit (events.js:117:20)
+42 error     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1096:12)
+42 error     at IncomingMessage.emit (events.js:117:20)
+42 error     at _stream_readable.js:943:16
+42 error     at process._tickCallback (node.js:419:13)
+43 error If you need help, you may report this *entire* log,
+43 error including the npm and node versions, at:
+43 error     <http://github.com/npm/npm/issues>
+44 error System Darwin 14.0.0
+45 error command "node" "/usr/local/bin/npm" "publish" "-f"
+46 error cwd /Users/rjurkov/workspace/aamvajs
+47 error node -v v0.10.32
+48 error npm -v 1.4.28
+49 verbose exit [ 1, true ]
