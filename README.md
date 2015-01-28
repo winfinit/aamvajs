@@ -75,6 +75,7 @@ If you find a bug or willing to add some enhancement, pull requests are very wel
 * 0.0.7 inflated birthday to a Date object, and fixed FL AAMVA spec, where expiration month is set to birthday month
 * 0.0.8 removed debug statements
 * 0.0.9 changed birthday to utc date
+* 0.0.10 fixed typo
 
 
 ## Legal
