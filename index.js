@@ -25,7 +25,6 @@ module.exports = {
             "dl": res2[3],
             "expiration_date": res2[5],
             "birthday": function() {
-                //19879908
                 var dob = res2[6].match(/(\d{4})(\d{2})(\d{2})/);
                 dob[1] = parseInt(dob[1]);
                 dob[2] = parseInt(dob[2]);
@@ -40,7 +39,7 @@ module.exports = {
                     dob[2] = parseInt(exp_dt[2]);
                 }
                 dob[2]--;
-                return (new Date(dob[1], dob[2], dob[3]));
+                return (new Date(Date.UTC(dob[1], dob[2], dob[3]));
             },
             "dl_overflow": res2[7],
             "cds_version": res3[1],
