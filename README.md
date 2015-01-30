@@ -3,9 +3,9 @@
 small helper library that provides one an ability to parse AAMVA magnetic stripe.
 regex was created based on 2012 spec
 
-**NOTE**:
+**NOTE:
 To support this effort, please contribute swipe streams for unsupported types
-and I would love to add support or fix things that are not working yet
+and I would love to add support or fix things that are not working yet**
 
 ## Installation
 
