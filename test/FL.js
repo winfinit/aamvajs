@@ -54,7 +54,6 @@ describe('Sex', function() {
 describe('DOB', function() {
     it('should be set to 19870108', function(){
         var date = new Date(Date.UTC(1987,0,8));
-        console.log(stripe.birthday());
         expect(stripe.birthday().toDateString()).to.equal(date.toDateString());
     });
 });
