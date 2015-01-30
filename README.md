@@ -81,6 +81,7 @@ If you find a bug or willing to add some enhancement, pull requests are very wel
 * 0.0.9 changed birthday to utc date
 * 0.0.10 fixed typo
 * 0.0.11 added TX support
+* 0.0.12 fixed duplicate name key
 
 
 ## Legal
