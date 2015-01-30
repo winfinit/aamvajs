@@ -7,7 +7,7 @@ module.exports = {
         var track = data.match(/(.*?\?)(.*?\?)(.*?\?)/);
         var res1 = track[1].match(/(\%)([A-Z]{2})([^\^]{0,13})\^?([^\^]{0,35})\^?([^\^]{0,29})\^?\s*?\?/);
         var res2 = track[2].match(/(;)(\d{6})(\d{0,13})(\=)(\d{4})(\d{8})(\d{0,5})\=?\?/);
-        var res3 = track[3].match(/(\#|\%)(\d|\!)(\d|\s)([0-9A-Z ]{11})([0-9A-Z ]{2})([0-9A-Z ]{10})([0-9A-Z ]{4})([12 ]{1})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})(.*?)\?/);
+        var res3 = track[3].match(/(\#|\%)(\d|\!|\")(\d|\s)([0-9A-Z ]{11})([0-9A-Z ]{2})([0-9A-Z ]{10})([0-9A-Z ]{4})([12 ]{1})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})(.*?)\?/);
         return {
             "state": res1[2],
             "city": res1[3],
@@ -39,6 +39,7 @@ module.exports = {
                     dob[2] = parseInt(exp_dt[2]);
                 }
                 dob[2]--;
+
                 return (new Date(Date.UTC(dob[1], dob[2], dob[3])));
             },
             "dl_overflow": res2[7],
@@ -67,8 +68,17 @@ module.exports = {
             "eye_color": res3[12],
             "misc": res3[13],
             "id": function(){
-                var res = res2[3].match(/(\d{2})(.*)/);
-                return (String.fromCharCode(Number(res[1]) + 64)  + res[2] + res2[7]);
+                var id;
+                switch(this.state) {
+                    case "FL":
+                        var res = res2[3].match(/(\d{2})(.*)/);
+                        id = (String.fromCharCode(Number(res[1]) + 64)  + res[2] + res2[7]);   
+                        break;                 
+                    default:
+                        id = res2[3];
+                        break;
+                }
+                return id;
             }
         };
     }

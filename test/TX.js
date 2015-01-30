@@ -2,28 +2,27 @@ var should = require('chai').should(),
  	expect = require('chai').expect,
     aamva = require('../index');
 
-    var data = '%FLDELRAY BEACH^DOE$JOHN$^4818 S FEDERAL BLVD^           \?\
-;6360100462172082009=2101198799080=?\
-#! 33435      I               1600                                   ECCECC00000?';
+    var data = '%TXAUSTIN^DOE$JOHN^12345 SHERBOURNE ST^?;63601538774194=150819810101?#" 78729      C               1505130BLKBLK?\
+    ';
 
     var stripe = aamva.stripe(data);
 
 
 describe('state', function() {
-    it('should be set to FL', function(){
-    	expect(stripe.state).to.equal("FL");
+    it('should be set to TX', function(){
+    	expect(stripe.state).to.equal("TX");
     });
 });
 
 describe('city', function() {
-    it('should be set to DELRAY BEACH', function(){
-    	expect(stripe.city).to.equal("DELRAY BEACH");
+    it('should be set to AUSTIN', function(){
+    	expect(stripe.city).to.equal("AUSTIN");
     });
 });
 
 describe('DMV ID', function() {
-    it('should be set to D621720820090', function(){
-    	expect(stripe.id()).to.equal("D621720820090");
+    it('should be set to 38774194', function(){
+    	expect(stripe.id()).to.equal("38774194");
     });
 });
 
@@ -40,8 +39,8 @@ describe('Last name', function() {
 });
 
 describe('Address', function() {
-    it('should be set to 4818 S FEDERAL BLVD', function(){
-    	expect(stripe.address).to.equal("4818 S FEDERAL BLVD");
+    it('should be set to 12345 SHERBOURNE ST', function(){
+    	expect(stripe.address).to.equal("12345 SHERBOURNE ST");
     });
 });
 
@@ -52,9 +51,8 @@ describe('Sex', function() {
 });
 
 describe('DOB', function() {
-    it('should be set to 19870108', function(){
-        var date = new Date(1987,0,8);
-        console.log(stripe.birthday());
+    it('should be set to 19810101', function(){
+        var date = new Date(Date.UTC(1981,0,1));
         expect(stripe.birthday().toDateString()).to.equal(date.toDateString());
     });
 });
