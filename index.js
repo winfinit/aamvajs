@@ -1,13 +1,11 @@
+/* based on 2012 aamva dl/id card design standard v1.0 */
 
 module.exports = {
     stripe: function(data) {
+        // remove new line characters for easier parsing
         data = data.replace(/\n/, "");
         // replace spaces with regular space
         data = data.replace(/\s/g, " ");
-        var track = data.match(/(.*?\?)(.*?\?)(.*?\?)/);
-        var res1 = track[1].match(/(\%)([A-Z]{2})([^\^]{0,13})\^?([^\^]{0,35})\^?([^\^]{0,29})\^?\s*?\?/);
-        var res2 = track[2].match(/(;)(\d{6})(\d{0,13})(\=)(\d{4})(\d{8})(\d{0,5})\=?\?/);
-        var res3 = track[3].match(/(\#|\%)(\d|\!|\")(\d|\s)([0-9A-Z ]{11})([0-9A-Z ]{2})([0-9A-Z ]{10})([0-9A-Z ]{4})([12 ]{1})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})(.*?)\?/);
 
         var tracks = data;
 
@@ -26,6 +24,21 @@ module.exports = {
             "expirationDate": 4,
             "birthday": 8,
             "idOverflow": 5,
+            "track3": 82,
+            "cdsVersion": 1,
+            "jurisdictionVersion": 1,
+            "postalCode": 11,
+            "class": 2,
+            "restrictions": 10,
+            "endorsements": 4,
+            "sex": 1,
+            "height": 3,
+            "weight": 3,
+            "hairColor": 3,
+            "eyeColor": 3,
+            "jurisdictionId": 10,
+            "reservedSpace": 22,
+            "security": 5
         };
 
  
@@ -110,8 +123,8 @@ module.exports = {
         track1.endSentinel = tracks.substring(index, index + lengthMap.endSentinel);
         index += lengthMap.endSentinel;
 
-        console.log(track1);
         var track2 = {
+            "startSentinel": undefined,
             "iin": undefined,
             "id": undefined,
             "fieldSeparator": undefined,
@@ -122,8 +135,9 @@ module.exports = {
         };
 
         /*
-            skipping start sentinel of track2 
+            start sentinel of track2 
         */
+        track2.startSentinel = tracks.substring(index, index + lengthMap.startSentinel);
         index += lengthMap.startSentinel;
 
         /*
@@ -174,40 +188,181 @@ module.exports = {
             information is used then a field separator is used in this 
             field.
         */
-
         var idOverflow = tracks.substring(index, index + lengthMap.idOverflow);
         if ( (new RegExp(track2.fieldSeparator)).test(idOverflow) ) {
             track2.idOverflow = idOverflow.substring(0, idOverflow.indexOf(track2.fieldSeparator));
-            index += ++track2.idOverflow.length;
+            index += track2.idOverflow.length + 1;
         } else {
             track2.idOverflow = idOverflow;
             index += lengthMap.idOverflow;
         }
 
-        index += lengthMap.idOverflow;
+        /* 
+            End sentinel: This character shall be after the last 
+            data character of the track.
+        */
 
+        track2.endSentinel = tracks.substring(index, index + lengthMap.endSentinel);
+        index += lengthMap.endSentinel;
 
+        var track3 = {
+            "startSentinel": undefined,
+            "cdsVersion": undefined,
+            "jurisdictionVersion": undefined,
+            "postalCode": undefined,
+            "class": undefined,
+            "restrictions": undefined,
+            "endorsements": undefined,
+            "sex": undefined,
+            "height": undefined,
+            "weight": undefined,
+            "hairColor": undefined,
+            "eyeColor": undefined,
+            "jurisdictionId": undefined,
+            "reservedSpace": undefined,
+            "security": undefined,
+            "endSentinel": undefined
+        };
 
-        console.log("track2", track2);
+        /*
+            Start sentinel:
+            This character shall be encoded at the beginning of the track.
+        */
+        track3.startSentinel = tracks.substring(index, index + lengthMap.startSentinel);
+        index += lengthMap.startSentinel;
 
+        /*
+            CDS Version #:
+            This is a decimal value between 0 and 9 that specifies the 
+            version level of the mag stripe format. All mag stripes 
+            compliant with this current AAMVA standard shall be designated 
+            “0”. Should a need arise requiring major revision to the format, 
+            this field provides the means to accommodate additional revision.
+        */
+        track3.cdsVersion = tracks.substring(index, index + lengthMap.cdsVersion);
+        index += lengthMap.cdsVersion;
+
+        /*
+            Jurisdiction Version #:
+            This is a decimal value between 0 and 9 that specifies the 
+            jurisdiction version level of the mag stripe format. 
+            Notwithstanding iterations of this standard, jurisdictions 
+            may implement incremental changes to their mag stripes.
+        */
+        track3.jurisdictionVersion = tracks.substring(index, index + lengthMap.jurisdictionVersion);
+        index += lengthMap.jurisdictionVersion;
+
+        /*
+            Postal code:
+            For an 11 digit postal or zip code. (left justify fill 
+            with spaces, no hyphen)
+        */
+        track3.postalCode = tracks.substring(index, index + lengthMap.postalCode);
+        index += lengthMap.postalCode;
+
+        /*
+            Class:
+            Represents the type of DL (ANSI codes modified for 
+            CDLIS).See I
+        */
+        track3.class = tracks.substring(index, index + lengthMap.class);
+        index += lengthMap.class;
+
+        /*
+            Restrictions:
+            See i, iii
+        */
+        track3.restrictions = tracks.substring(index, index + lengthMap.restrictions);
+        index += lengthMap.restrictions;
+
+        /*
+            Endorsements:
+            See i, iii
+        */
+        track3.endorsements = tracks.substring(index, index + lengthMap.endorsements);
+        index += lengthMap.endorsements;
+
+        /*
+            Sex:
+            1 for male, 2 for female.
+        */
+        track3.sex = tracks.substring(index, index + lengthMap.sex);
+        index += lengthMap.sex;
+
+        /*
+            Height:
+            See i, iii
+        */
+        track3.height = tracks.substring(index, index + lengthMap.height);
+        index += lengthMap.height;
+
+        /*
+            Weight:
+            See i, iii
+        */
+        track3.weight = tracks.substring(index, index + lengthMap.weight);
+        index += lengthMap.weight;
+
+        /*
+            Hair Color:
+            See i, iii
+        */
+        track3.hairColor = tracks.substring(index, index + lengthMap.hairColor);
+        index += lengthMap.hairColor;
+
+        /*
+            Eye Color:
+            See i, iii
+        */
+        track3.eyeColor = tracks.substring(index, index + lengthMap.eyeColor);
+        index += lengthMap.eyeColor;
+
+        /*
+            ID #:
+            Discretionary data for use by each jurisdiction.
+        */
+        track3.jurisdictionId = tracks.substring(index, index + lengthMap.jurisdictionId);
+        index += lengthMap.jurisdictionId;
+
+        /*
+            Reserved space:
+            Discretionary data for use by each jurisdiction.
+        */
+        track3.reservedSpace = tracks.substring(index, index + lengthMap.reservedSpace);
+        index += lengthMap.reservedSpace;
+
+        /*
+            Security:
+            Discretionary data for use by each jurisdiction.
+        */
+        track3.security = tracks.substring(index, index + lengthMap.security);
+        index += lengthMap.security;
+
+        /*
+            End sentinel:
+            This character shall be after the last data 
+            character of the track.
+        */
+        track3.endSentinel = tracks.substring(index, index + lengthMap.endSentinel);
+        index += lengthMap.endSentinel;
 
         return {
-            "state": res1[2],
-            "city": res1[3],
+            "state": track1.state,
+            "city": track1.city,
             "name": function() {
-                var res = res1[4].match(/([^\$]{0,35})\$?([^\$]{0,35})?\$?([^\$]{0,35})?/);
+                var res = track1.name.match(/([^\$]{0,35})\$?([^\$]{0,35})?\$?([^\$]{0,35})?/);
                 return {
                     last: res[1],
                     first: res[2],
                     middle: res[3]
                 }
             },
-            "address": res1[5],
-            "iso_iin": res2[2],
-            "dl": res2[3],
-            "expiration_date": res2[5],
+            "address": track1.address,
+            "iso_iin": track2.iin,
+            "dl": track2.id,
+            "expiration_date": track2.expirationDate,
             "birthday": function() {
-                var dob = res2[6].match(/(\d{4})(\d{2})(\d{2})/);
+                var dob = track2.birthday.match(/(\d{4})(\d{2})(\d{2})/);
                 dob[1] = parseInt(dob[1]);
                 dob[2] = parseInt(dob[2]);
                 dob[3] = parseInt(dob[3]);
@@ -217,22 +372,22 @@ module.exports = {
                         that dob month === to expiration month, it should be 
                         opposite
                         */
-                    var exp_dt = res2[5].match(/(\d{2})(\d{2})/);
+                    var exp_dt = track2.expirationDate.match(/(\d{2})(\d{2})/);
                     dob[2] = parseInt(exp_dt[2]);
                 }
                 dob[2]--;
 
                 return (new Date(Date.UTC(dob[1], dob[2], dob[3])));
             },
-            "dl_overflow": res2[7],
-            "cds_version": res3[1],
-            "jurisdiction_version": res3[2],
-            "postal_code": res3[4],
-            "class": res3[5],
-            "restrictions": res3[6],
-            "endorsments": res3[7],
+            "dl_overflow": track2.idOverflow,
+            "cds_version": track3.cdsVersion,
+            "jurisdiction_version": track3.jurisdictionVersion,
+            "postal_code": track3.postalCode,
+            "class": track3.class,
+            "restrictions": track3.restrictions,
+            "endorsments": track3.endorsments,
             "sex": function() {
-                switch(Number(res3[8])) {
+                switch(Number(track3.sex)) {
                     case 1:
                         return "MALE";
                         break;
@@ -244,17 +399,19 @@ module.exports = {
                         break;
                 }
             },
-            "height": res3[9],
-            "weight": res3[10],
-            "hair_color": res3[11],
-            "eye_color": res3[12],
-            "misc": res3[13],
+            "height": track3.height,
+            "weight": track3.weight,
+            "hair_color": track3.hairColor,
+            "eye_color": track3.eyeColor,
+            "reserved_space": track3.reservedSpace,
+            "security": track3.security,
+            "jurisdictionId": track3.jurisdictionId,
             "id": function(){
                 var id;
                 switch(this.state) {
                     case "FL":
-                        var res = res2[3].match(/(\d{2})(.*)/);
-                        id = (String.fromCharCode(Number(res[1]) + 64)  + res[2] + res2[7]);   
+                        var res = track2.id.match(/(\d{2})(.*)/);
+                        id = (String.fromCharCode(Number(res[1]) + 64)  + res[2] + track2.idOverflow);   
                         break;                 
                     default:
                         id = res2[3];
