@@ -1,6 +1,6 @@
 
-module.exports = {
-    stripe: function(data) {
+(function(global) {
+    var stripe = function(data) {
         data = data.replace(/\n/, "");
         // replace spaces with regular space
         data = data.replace(/\s/g, " ");
@@ -80,5 +80,70 @@ module.exports = {
                 return id;
             }
         };
-    }
-}
+    };
+    
+    var pdf417 = function(data) {
+     data = data.replace(/\n/, "");
+        // replace spaces with regular space
+        data = data.replace(/\s/g, " ");
+        var res = data.match(/DAA(.*?)DAG(.*?)DAI(.*?)DAJ(.*?)DAK(.*?)DAQ(.*?)DAR.*?DBA(.*?)DBB(.*?)DBC(.*?)DBD(.*?)DBH(.*?)DAU(\d{0,3})/);
+
+        return {
+            "state": res[4],
+            "city": res[3],
+            "name": function() {
+                var name = res[1].split(',');
+                var response = {
+                    last: undefined,
+                    middle: undefined,
+                    first: undefined
+                };
+
+                if ( name.length > 2 ) {
+                    response.last = name[0];
+                    response.first = name[1];
+                    response.middle = name[2];
+                } else {
+                    response.last = name[0];
+                    response.first = name[1];
+                }
+
+                return response;
+            },
+            "address": res[2],
+            "expiration_date": res[7],
+            "birthday": function() {
+                var dob = res[8].match(/(\d{4})(\d{2})(\d{2})/);
+                dob[1] = parseInt(dob[1]);
+                dob[2] = parseInt(dob[2]);
+                dob[3] = parseInt(dob[3]);
+
+                return (new Date(Date.UTC(dob[1], dob[2], dob[3])));
+            },
+            "postal_code": /\d{5}-\d+/.test(res[5]) ? res[5] : res[5].substring(0, 5),
+            "sex": function() {
+                switch(Number(res[9])) {
+                    case 1:
+                        return "MALE";
+                        break;
+                    case 2:
+                        return "FAMALE";
+                        break;
+                    default:
+                        return "MISSING/INVALID";
+                        break;
+                }
+            },
+            "height": res[12],
+            "id": function(){
+                return res[6];
+            }
+        };
+    };
+
+
+
+  global.foo = foo;
+
+}(this));
+
