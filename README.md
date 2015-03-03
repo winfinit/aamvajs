@@ -23,6 +23,12 @@ and I would love to add support or fix things that are not working yet**
   ;6360100462172082009=2101198299090=?\
   #! 33435      I               1600                                   ECCECC00000?';
 
+  var barcode_data = '@ANSI 6360100102DL00390190ZF02290063DLDAADOE,JOHNDAG5929 N \
+  ROCK STDAIDELRAY SHOREDAJFLDAK44556-     DAQJ621625830080DARI   DAS          \
+  DAT     DBA20210108DBB19770204DBC1DBD20120612DBHN         DAU600ZFZFAREPLACED\
+  : 00000000ZFB ZFCP771206120090ZFD ZFE07-01-11
+  ';
+
   var res = aamva.stripe(stripe_data);
   console.log("DMV ID:",res.id()); /* D621720820090 */
   console.log("First name:",res.name().first); /* JOHN */
@@ -31,6 +37,15 @@ and I would love to add support or fix things that are not working yet**
   console.log("Sex:",res.sex()); /* MALE, FEMALE, MISSING/INVALID */
   console.log("DOB:",res.birthday()); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */
   console.log("Entire object", res);
+
+  var res2 = aamva.pdf417(barcode_data);
+  console.log("DMV ID:",res2.id()); /* D621720820090 */
+  console.log("First name:",res2.name().first); /* JOHN */
+  console.log("Last name:",res2.name().last); /* DOE */
+  console.log("Middle name:",res2.name().middle); /* "" */
+  console.log("Sex:",res2.sex()); /* MALE, FEMALE, MISSING/INVALID */
+  console.log("DOB:",res2.birthday()); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */
+  console.log("Entire object", res2);
 
 /* 
   output: 
@@ -82,6 +97,7 @@ If you find a bug or willing to add some enhancement, pull requests are very wel
 * 0.0.10 fixed typo
 * 0.0.11 added TX support
 * 0.0.12 fixed duplicate name key
+* 0.0.13 added pdf417 support, added example page, and changed plugin to be compatible with browser
 
 
 ## Legal
