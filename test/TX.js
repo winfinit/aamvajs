@@ -7,6 +7,8 @@ var should = require('chai').should(),
 
     var stripe = aamva.stripe(data);
 
+    console.log(stripe);
+
 
 describe('state', function() {
     it('should be set to TX', function(){

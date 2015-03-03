@@ -106,8 +106,12 @@ module.exports = {
         var addressMaxLength = (lengthMap.track1 - index - lengthMap.endSentinel);
         var address = tracks.substring(index, index + addressMaxLength);
         if ( /\^/.test(address) ) {
+            console.log(address);
             track1.address = address.substring(0, address.indexOf('^'));
-            if ( track1.address.length >= lengthMap.address ) {
+            if ( /\?/.test(address) ) {
+                index += (address.substring(0, address.indexOf('?')).length);
+            }
+            else if ( track1.address.length >= lengthMap.address ) {
                 index += ++track1.address.length;
             } else {
                 index += lengthMap.address + 2;
@@ -155,7 +159,13 @@ module.exports = {
             accommodated in field number 7.
         */
         track2.id = tracks.substring(index, index + lengthMap.id);
-        index += lengthMap.id;
+        if ( /\=/.test(track2.id) ) {
+            track2.id = track2.id.substring(0, track2.id.indexOf('='));
+            index += track2.id.length;
+        } else {
+            index += lengthMap.id;
+        }
+
 
         /*
             A field separator must be used after the DL/ID number 
@@ -192,7 +202,10 @@ module.exports = {
         if ( (new RegExp(track2.fieldSeparator)).test(idOverflow) ) {
             track2.idOverflow = idOverflow.substring(0, idOverflow.indexOf(track2.fieldSeparator));
             index += track2.idOverflow.length + 1;
-        } else {
+        }  else if ( /\?/.test(idOverflow) ) {
+            track2.idOverflow = idOverflow.substring(0, idOverflow.indexOf('?'));
+            index += track2.idOverflow.length;
+        }else {
             track2.idOverflow = idOverflow;
             index += lengthMap.idOverflow;
         }
@@ -345,6 +358,11 @@ module.exports = {
         */
         track3.endSentinel = tracks.substring(index, index + lengthMap.endSentinel);
         index += lengthMap.endSentinel;
+
+        console.log("tracks", tracks);
+        console.log("track1", track1);
+        console.log("track2", track2);
+        console.log("track3", track3);
 
         return {
             "state": track1.state,
