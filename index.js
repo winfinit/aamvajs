@@ -143,7 +143,8 @@
 
 
 
-  global.foo = foo;
+  global.stripe = stripe;
+  global.pdf417 = pdf417;
 
 }(this));
 
