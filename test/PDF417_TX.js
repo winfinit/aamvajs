@@ -2,14 +2,14 @@ var should = require('chai').should(),
     expect = require('chai').expect,
     aamva = require('../index');
 
-    var data = '@ANSI 6360100102DL00390190ZF02290063DLDAADOE,JOHNDAG5929 N ROCK STDAIDELRAY SHOREDAJFLDAK44556-     DAQJ641720820450DARI   DAS          DAT     DBA20210108DBB19770208DBC1DBD20120612DBHN         DAU600ZFZFAREPLACED: 00000000ZFB ZFCP771206120090ZFD ZFE07-01-11';
+    var data = '@ANSI 636015030002DL00410217ZT02580015DLDCACDCBNONEDCDNONEDBA08042015DCSDOEDCTJOHNDBD08192014DBB02081977DBC1DAYBLKDAU 65 INDAG5929 N ROCK STDAIAUSTINDAJTXDAK44556      DAQ38884194DCF18613490088119258857DCGUSADCHNONEDAZBLKDCUZTZTA130ZTBA';
 
     var res = aamva.parse(data);
 
 
 describe('state', function() {
-    it('should be set to FL', function(){
-        expect(res.state).to.equal("FL");
+    it('should be set to TX', function(){
+        expect(res.state).to.equal("TX");
     });
 });
 
@@ -54,3 +54,4 @@ describe('postal_code', function() {
     });
 
 });
+

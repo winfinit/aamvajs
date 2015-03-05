@@ -6,7 +6,7 @@ var should = require('chai').should(),
 ;6360100462172082009=2101198799080=?\
 #! 33435      I               1600                                   ECCECC00000?';
 
-    var stripe = aamva.stripe(data);
+    var stripe = aamva.parse(data);
 
 
 describe('state', function() {

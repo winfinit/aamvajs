@@ -5,7 +5,7 @@ var should = require('chai').should(),
     var data = '%TXAUSTIN^DOE$JOHN^12345 SHERBOURNE ST^?;63601538774194=150819810101?#" 78729      C               1505130BLKBLK?\
     ';
 
-    var stripe = aamva.stripe(data);
+    var stripe = aamva.parse(data);
 
 
 describe('state', function() {
