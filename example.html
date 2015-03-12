@@ -5,7 +5,7 @@
 		<script src="./index.js"></script>
 	</head>
 	<body>
-		<input type="text" id="parse">
+		<input type="text" id="parse" disabled="disabled">
 		<button onclick="parse_stripe()">Parse stripe</button>
 		<button onclick="parse_pdf417()">Parse pdf417</button>
 		<pre id="output"></pre>
@@ -32,6 +32,9 @@
 @ANSI 6360100102DL00390190ZF02290063DLDAADOE,JOHNDAG5929 N ROCK STDAIDELRAY SHOREDAJFLDAK44556-     DAQJ621625830080DARI   DAS          DAT     DBA20210108DBB19770204DBC1DBD20120612DBHN         DAU600ZFZFAREPLACED: 00000000ZFB ZFCP771206120090ZFD ZFE07-01-11
                 </pre>
 		<script>
+            $( document ).keypress(function(event) {
+                console.log( "Handler for .keypress() called.", event.which, String.fromCharCode(event.which) );
+            });
 			function parse_stripe() {
 				var output = stripe( $('#parse').val() );
                                 $('#id').html(output.id());
@@ -48,7 +51,7 @@
                                 $('#id').html(output.id());
                                 $('#name').html(output.name().first + " " + ( output.name().middle || "" ) + " " + output.name().last);
                                 $('#sex').html(output.sex());
-                                $('#dob').html((output.birthday().getUTCMonth() + 1) + "-" + output.birthday().getUTCDate() + "-" + output.birthday().getUTCFullYear());
+                                $('#dob').html((output.birthday().getUTCMonth()) + "-" + output.birthday().getUTCDate() + "-" + output.birthday().getUTCFullYear());
                                 $('#address').html(output.address);
                                 $('#city').html(output.city);
                                 $('#state').html(output.state);
