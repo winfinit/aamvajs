@@ -100,6 +100,7 @@ If you find a bug or willing to add some enhancement, pull requests are very wel
 * 0.0.11 added TX support
 * 0.0.12 fixed duplicate name key
 * 0.0.13 added pdf417 support, added example page, and changed plugin to be compatible with browser
+* 0.0.16 fixed version regex for pdf417, and added MD tests.
 
 
 ## Legal
