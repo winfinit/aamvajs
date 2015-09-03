@@ -103,13 +103,16 @@
         data = data.replace(/\s/g, " ");
 
         // get version of aamva (before 2000 or after)
-        var version = data.match(/ANSI \d{6}(\d{2})/);
+        var version = data.match(/[A-Z ]{5}\d{6}(\d{2})/);
+
+
 
         var parseRegex;
 
         /* version 01 year 2000 */
         if ( Number(version[1]) === 1 ) {
             parseRegex = new RegExp(
+                '(DAQ.*?)?' + // Drivers license number
                 '(DAA.*?)?' + // Driver License Name
                 '(DAG.*?)?' + // Driver Mailing Street Address
                 '(DAI.*?)?' + // Driver Mailing City
@@ -322,7 +325,7 @@
 
         for (var i = 1; i < res.length; i++ ) {
             if ( res[i] !== undefined ) {
-                parsedData[ String(res[i]).substring(0,3) ] = res[i].substring(3);             
+                parsedData[ String(res[i]).substring(0,3) ] = res[i].substring(3).trim();             
             }
         }
 
@@ -410,7 +413,7 @@
             "eye_color": undefined,
             "misc": undefined,
             "id": function(){
-                return parsedData.DAQ;
+                return parsedData.DAQ.replace(/[^A-ZA-Z0-9]/g, "");
             }
         };
 
