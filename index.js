@@ -125,7 +125,7 @@
                 '(DBA.*?)?' + // Driver License Expiration Date
                 '(DBB.*?)?' + // Date of Birth
                 '(DBC.*?)?' + // Driver Sex
-                '(DBD.*?)'    // Driver License or ID Document Issue Date
+                '(DBD.*?)?' + // Driver License or ID Document Issue Date
                 /* optional 
                 '(DAU.*?)?' + // Height (FT/IN)
                 '(DAW.*?)?' + // Weight (LBS)
@@ -166,6 +166,7 @@
                 '(DBR.*?)?' + // Driver "AKA" Suffix
                 '(DBS.*?)?'   // Driver "AKA" Prefix
                 */
+                '$'
             );    
         }
         /* version 02 year 2003 */
@@ -195,7 +196,7 @@
                 '(DAQ.*?)?' + // Customer ID Number
                 '(DCF.*?)?' + // Document Discriminator
                 '(DCG.*?)?' + // Country Identification
-                '(DCH.*?)?'    // Federal Commercial Vehicle Codes
+                '(DCH.*?)?' + // Federal Commercial Vehicle Codes
 
                 /* optional elements 
                 '(DAH.*?)?' + // Address – Street 2
@@ -213,30 +214,31 @@
                 '(DCQ.*?)?' + // Jurisdiction- specific endorsement code description
                 '(DCR.*?)?'  // Jurisdiction- specific restriction code description
                 */
+                '$'
             );
         }
         /* version 03 year 2005 */
         else if ( Number(version[1]) === 3) {
             parseRegex = new RegExp(
-                '(DCA.*?)' + // Jurisdiction-specific vehicle class
-                '(DCB.*?)' + // Jurisdiction-specific restriction codes
-                '(DCD.*?)' + // Jurisdiction-specific endorsement codes
-                '(DBA.*?)' + // Document Expiration Date
-                '(DCS.*?)' + // Customer Family Name
-                '(DCT.*?)' + // Customer Given Names
-                '(DBD.*?)' + // Document Issue Date
-                '(DBB.*?)' + // Date of Birth
-                '(DBC.*?)' + // Physical Description – Sex
-                '(DAY.*?)' + // Physical Description – Eye Color
-                '(DAU.*?)' + // Physical Description – Height
-                '(DAG.*?)' + // Address – Street 1
-                '(DAI.*?)' + // Address – City
-                '(DAJ.*?)' + // Address – Jurisdiction Code
-                '(DAK.*?)' + // Address – Postal Code
-                '(DAQ.*?)' + // Customer ID Number
-                '(DCF.*?)' + // Document Discriminator
-                '(DCG.*?)' + // Country Identification
-                '(DCH.*?)'   // Federal Commercial Vehicle Codes
+                '(DCA.*?)?' + // Jurisdiction-specific vehicle class
+                '(DCB.*?)?' + // Jurisdiction-specific restriction codes
+                '(DCD.*?)?' + // Jurisdiction-specific endorsement codes
+                '(DBA.*?)?' + // Document Expiration Date
+                '(DCS.*?)?' + // Customer Family Name
+                '(DCT.*?)?' + // Customer Given Names
+                '(DBD.*?)?' + // Document Issue Date
+                '(DBB.*?)?' + // Date of Birth
+                '(DBC.*?)?' + // Physical Description – Sex
+                '(DAY.*?)?' + // Physical Description – Eye Color
+                '(DAU.*?)?' + // Physical Description – Height
+                '(DAG.*?)?' + // Address – Street 1
+                '(DAI.*?)?' + // Address – City
+                '(DAJ.*?)?' + // Address – Jurisdiction Code
+                '(DAK.*?)?' + // Address – Postal Code
+                '(DAQ.*?)?' + // Customer ID Number
+                '(DCF.*?)?' + // Document Discriminator
+                '(DCG.*?)?' + // Country Identification
+                '(DCH.*?)?' + // Federal Commercial Vehicle Codes
                 /* optional elements 
                 + '(DAH.*?)?' + // Address – Street 2
                 '(DAZ.*?)?' + // Hair color
@@ -256,6 +258,7 @@
                 '(DCQ.*?)?' + // Jurisdiction- specific endorsement code description
                 '(DCR.*?)?'  // Jurisdiction- specific restriction code description
                 */
+                '$'
             );
         }
         /* version 07 year 2012 */
@@ -282,7 +285,7 @@
                 '(DCG.*?)?' + // Country Identification
                 '(DDE.*?)?' + // Family name truncation
                 '(DDF.*?)?' + // First name truncation
-                '(DDG.*?)'    // Middle name truncation
+                '(DDG.*?)?' + // Middle name truncation
                 /* optional elements 
                 '(DAH.*?)?' + // Address – Street 2
                 '(DAZ.*?)?' + // Hair color
@@ -313,6 +316,7 @@
                 '(DDK.*?)?' + // Organ Donor Indicator
                 '(DDL.*?)?'   // Veteran Indicator
                 */
+                '$'
             );
         } 
         else {
