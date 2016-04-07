@@ -21,30 +21,22 @@ describe('address', function() {
 
 describe('gender', function() {
     it('should be set to MALE', function(){
-        expect(res.sex()).to.equal("MALE");
+        expect(res.sex).to.equal("MALE");
     });
 });
 
 describe('name', function() {
     it('first should be set to JACK', function(){
-        expect(res.name().first).to.equal("JACK");
+        expect(res.name.first).to.equal("JACK");
     });
     it('last should be set to JOHNSON', function(){
-        expect(res.name().last).to.equal("JOHNSON");
+        expect(res.name.last).to.equal("JOHNSON");
     });
 });
 
 describe('birthday', function() {
-    it('year should be 1991', function(){
-        expect(res.birthday().getUTCFullYear()).to.equal(1991);
-    });
-
-    it('month should be 02', function(){
-        expect(res.birthday().getUTCMonth()).to.equal(2);
-    });
-
-    it('day should be 09', function(){
-        expect(res.birthday().getUTCDate() ).to.equal(9);
+    it('should be 19910209', function(){
+        expect(res.birthday).to.equal('19910209');
     });
 });
 
@@ -52,12 +44,11 @@ describe('postal_code', function() {
     it('should be 21230', function(){
         expect(res.postal_code).to.equal("21230");
     });
-
 });
 
 describe('id', function() {
     it('should be 21230', function(){
-        expect(res.id()).to.equal("K134123145103");
+        expect(res.id).to.equal("K134123145103");
     });
 
 });

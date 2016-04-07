@@ -23,39 +23,38 @@
         var res1 = track[1].match(/(\%)([A-Z]{2})([^\^]{0,13})\^?([^\^]{0,35})\^?([^\^]{0,29})\^?\s*?\?/);
         var res2 = track[2].match(/(;)(\d{6})(\d{0,13})(\=)(\d{4})(\d{8})(\d{0,5})\=?\?/);
         var res3 = track[3].match(/(\#|\%|\+)(\d|\!|\")(\d|\s)([0-9A-Z ]{11})([0-9A-Z ]{2})([0-9A-Z ]{10})([0-9A-Z ]{4})([12 ]{1})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})([0-9A-Z ]{3})(.*?)\?/);
+        var state = res1[2];
         return {
-            "state": res1[2],
+            "state": state,
             "city": res1[3],
             "name": function() {
                 var res = res1[4].match(/([^\$]{0,35})\$?([^\$]{0,35})?\$?([^\$]{0,35})?/);
+                if (!res) return;
                 return {
                     last: res[1],
                     first: res[2],
                     middle: res[3]
                 }
-            },
+            }(),
             "address": res1[5],
             "iso_iin": res2[2],
             "dl": res2[3],
             "expiration_date": res2[5],
             "birthday": function() {
-                var dob = res2[6].match(/(\d{4})(\d{2})(\d{2})/);
-                dob[1] = parseInt(dob[1]);
-                dob[2] = parseInt(dob[2]);
-                dob[3] = parseInt(dob[3]);
+              var dob = res2[6].match(/(\d{4})(\d{2})(\d{2})/);
+              if (!dob) return;
 
-                if (dob[2] === 99) {
-                    /* FL decided to reverse 2012 aamva spec, 99 means here 
-                        that dob month === to expiration month, it should be 
-                        opposite
-                        */
-                    var exp_dt = res2[5].match(/(\d{2})(\d{2})/);
-                    dob[2] = parseInt(exp_dt[2]);
-                }
-                dob[2]--;
-
-                return (new Date(Date.UTC(dob[1], dob[2], dob[3])));
-            },
+              if (dob[2] === '99') {
+                  /* FL decided to reverse 2012 aamva spec, 99 means here 
+                      that dob month === to expiration month, it should be 
+                      opposite
+                      */
+                  var exp_dt = res2[5].match(/(\d{2})(\d{2})/);
+                  dob[2] = exp_dt[2];
+              }
+              //dob[2]--; what was this for?
+              return dob[1] + dob[2] + dob[3];
+            }(),
             "dl_overflow": res2[7],
             "cds_version": res3[1],
             "jurisdiction_version": res3[2],
@@ -75,7 +74,7 @@
                         return "MISSING/INVALID";
                         break;
                 }
-            },
+            }(),
             "height": res3[9],
             "weight": res3[10],
             "hair_color": res3[11],
@@ -83,9 +82,10 @@
             "misc": res3[13],
             "id": function(){
                 var id;
-                switch(this.state) {
+                switch(state) {
                     case "FL":
                         var res = res2[3].match(/(\d{2})(.*)/);
+                        if (!res) return;
                         id = (String.fromCharCode(Number(res[1]) + 64)  + res[2] + res2[7]);   
                         break;                 
                     default:
@@ -93,7 +93,7 @@
                         break;
                 }
                 return id;
-            }
+            }()
         };
     };
     
@@ -374,23 +374,16 @@
                     first: parsedData.DAC,
                     middle: parsedData.DAD
                 }
-            },
+            }(),
             "address": parsedData.DAG,
             "iso_iin": undefined,
             "dl": parsedData.DAQ,
             "expiration_date": parsedData.DBA,
             "birthday": function() {
-                var dob = parsedData.DBB.match(/(\d{2})(\d{2})(\d{4})/);
-                dob[1] = parseInt(dob[1]);
-                dob[2] = parseInt(dob[2]);
-                dob[3] = parseInt(dob[3]);
-
-                return (
-                    new Date(
-                        Date.UTC(dob[3], dob[1], dob[2]) 
-                    ) 
-                );
-            },
+              var match = parsedData.DBB.match(/(\d{2})(\d{2})(\d{4})/);
+              if (!match) return;
+              return match[3] + match[1] + match[2];
+            }(),
             "dl_overflow": undefined,
             "cds_version": undefined,
             "jurisdiction_version": undefined,
@@ -410,15 +403,16 @@
                         return "MISSING/INVALID";
                         break;
                 }
-            },
+            }(),
             "height": undefined,
             "weight": undefined,
             "hair_color": undefined,
             "eye_color": undefined,
             "misc": undefined,
             "id": function(){
+                if (!parsedData.DAQ) return;
                 return parsedData.DAQ.replace(/[^A-ZA-Z0-9]/g, "");
-            }
+            }()
         };
 
         return rawData;

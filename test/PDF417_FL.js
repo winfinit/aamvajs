@@ -21,30 +21,22 @@ describe('address', function() {
 
 describe('gender', function() {
     it('should be set to MALE', function(){
-        expect(res.sex()).to.equal("MALE");
+        expect(res.sex).to.equal("MALE");
     });
 });
 
 describe('name', function() {
     it('first should be set to JOHN', function(){
-        expect(res.name().first).to.equal("JOHN");
+        expect(res.name.first).to.equal("JOHN");
     });
     it('last should be set to DOE', function(){
-        expect(res.name().last).to.equal("DOE");
+        expect(res.name.last).to.equal("DOE");
     });
 });
 
 describe('birthday', function() {
-    it('year should be 1977', function(){
-        expect(res.birthday().getUTCFullYear()).to.equal(1977);
-    });
-
-    it('month should be 02', function(){
-        expect(res.birthday().getUTCMonth()).to.equal(2);
-    });
-
-    it('day should be 08', function(){
-        expect(res.birthday().getUTCDate() ).to.equal(8);
+    it('year should be 19770208', function(){
+        expect(res.birthday).to.equal('19770208');
     });
 });
 
@@ -52,5 +44,4 @@ describe('postal_code', function() {
     it('should be 44556', function(){
         expect(res.postal_code).to.equal("44556");
     });
-
 });

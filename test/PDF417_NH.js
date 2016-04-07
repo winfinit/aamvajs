@@ -21,30 +21,22 @@ describe('PDF417, NH', function() {
 
   describe('gender', function() {
       it('should be set to MALE', function(){
-          expect(res.sex()).to.equal("MALE");
+          expect(res.sex).to.equal("MALE");
       });
   });
 
   describe('name', function() {
       it('first should be set to JOHN A', function(){
-          expect(res.name().first).to.equal("JOHN A");
+          expect(res.name.first).to.equal("JOHN A");
       });
       it('last should be set to SMITH', function(){
-          expect(res.name().last).to.equal("SMITH");
+          expect(res.name.last).to.equal("SMITH");
       });
   });
 
   describe('birthday', function() {
-      it('year should be 1990', function(){
-          expect(res.birthday().getUTCFullYear()).to.equal(1990);
-      });
-
-      it('month should be 10', function(){
-          expect(res.birthday().getUTCMonth()).to.equal(10);
-      });
-
-      it('day should be 07', function(){
-          expect(res.birthday().getUTCDate()).to.equal(7);
+      it('year should be 19901007', function(){
+          expect(res.birthday).to.equal('19901007');
       });
   });
 
