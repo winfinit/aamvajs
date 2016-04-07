@@ -394,7 +394,7 @@
             "dl_overflow": undefined,
             "cds_version": undefined,
             "jurisdiction_version": undefined,
-            "postal_code": parsedData.DAK.match(/\d{-}\d+/)? parsedData.DAK : parsedData.DAK.substring(0,5),
+            "postal_code": parsedData.DAK ? (parsedData.DAK.match(/\d{-}\d+/) ? parsedData.DAK : parsedData.DAK.substring(0,5)) : undefined,
             "class": parsedData.DCA,
             "restrictions": undefined,
             "endorsments": undefined,
