@@ -22,19 +22,19 @@ describe('city', function() {
 
 describe('DMV ID', function() {
     it('should be set to 38774194', function(){
-    	expect(stripe.id()).to.equal("38774194");
+    	expect(stripe.id).to.equal("38774194");
     });
 });
 
 describe('First name', function() {
     it('should be set to JOHN', function(){
-    	expect(stripe.name().first).to.equal("JOHN");
+    	expect(stripe.name.first).to.equal("JOHN");
     });
 });
 
 describe('Last name', function() {
     it('should be set to DOE', function(){
-    	expect(stripe.name().last).to.equal("DOE");
+    	expect(stripe.name.last).to.equal("DOE");
     });
 });
 
@@ -46,13 +46,12 @@ describe('Address', function() {
 
 describe('Sex', function() {
     it('should be set to MALE', function(){
-    	expect(stripe.sex()).to.equal("MALE");
+    	expect(stripe.sex).to.equal("MALE");
     });
 });
 
 describe('DOB', function() {
-    it('should be set to 19810101', function(){
-        var date = new Date(Date.UTC(1981,0,1));
-        expect(stripe.birthday().toDateString()).to.equal(date.toDateString());
+    it('should be 1981010', function() {
+      expect(stripe.birthday).to.equal('19810101');
     });
 });
