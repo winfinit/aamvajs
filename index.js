@@ -45,8 +45,8 @@
               if (!dob) return;
 
               if (dob[2] === '99') {
-                  /* FL decided to reverse 2012 aamva spec, 99 means here 
-                      that dob month === to expiration month, it should be 
+                  /* FL decided to reverse 2012 aamva spec, 99 means here
+                      that dob month === to expiration month, it should be
                       opposite
                       */
                   var exp_dt = res2[5].match(/(\d{2})(\d{2})/);
@@ -59,7 +59,7 @@
             "cds_version": res3[1],
             "jurisdiction_version": res3[2],
             "postal_code": res3[4],
-            "class": res3[5],
+            "klass": res3[5],
             "restrictions": res3[6],
             "endorsments": res3[7],
             "sex": function() {
@@ -86,8 +86,8 @@
                     case "FL":
                         var res = res2[3].match(/(\d{2})(.*)/);
                         if (!res) return;
-                        id = (String.fromCharCode(Number(res[1]) + 64)  + res[2] + res2[7]);   
-                        break;                 
+                        id = (String.fromCharCode(Number(res[1]) + 64)  + res[2] + res2[7]);
+                        break;
                     default:
                         id = res2[3];
                         break;
@@ -96,7 +96,7 @@
             }()
         };
     };
-    
+
     var pdf417 = function(data) {
         data = data.replace(/\n/, "");
         // replace spaces with regular space
@@ -126,7 +126,7 @@
                 '(DBB.*?)?' + // Date of Birth
                 '(DBC.*?)?' + // Driver Sex
                 '(DBD.*?)?' + // Driver License or ID Document Issue Date
-                /* optional 
+                /* optional
                 '(DAU.*?)?' + // Height (FT/IN)
                 '(DAW.*?)?' + // Weight (LBS)
                 '(DAY.*?)?' + // Eye Color
@@ -167,7 +167,7 @@
                 '(DBS.*?)?'   // Driver "AKA" Prefix
                 */
                 '$'
-            );    
+            );
         }
         /* version 02 year 2003 */
         else if ( Number(version[1]) === 2) {
@@ -198,7 +198,7 @@
                 '(DCG.*?)?' + // Country Identification
                 '(DCH.*?)?' + // Federal Commercial Vehicle Codes
 
-                /* optional elements 
+                /* optional elements
                 '(DAH.*?)?' + // Address – Street 2
                 '(DAZ.*?)?' + // Hair color
                 '(DCI.*?)?' + // Place of birth
@@ -239,7 +239,7 @@
                 '(DCF.*?)?' + // Document Discriminator
                 '(DCG.*?)?' + // Country Identification
                 '(DCH.*?)?' + // Federal Commercial Vehicle Codes
-                /* optional elements 
+                /* optional elements
                 + '(DAH.*?)?' + // Address – Street 2
                 '(DAZ.*?)?' + // Hair color
                 '(DCI.*?)?' + // Place of birth
@@ -286,7 +286,7 @@
                 '(DDE.*?)?' + // Family name truncation
                 '(DDF.*?)?' + // First name truncation
                 '(DDG.*?)?' + // Middle name truncation
-                /* optional elements 
+                /* optional elements
                 '(DAH.*?)?' + // Address – Street 2
                 '(DAZ.*?)?' + // Hair color
                 '(DCI.*?)?' + // Place of birth
@@ -318,7 +318,7 @@
                 */
                 '$'
             );
-        } 
+        }
         else {
             console.log('unable to get version');
             // probably not a right parse...
@@ -329,7 +329,7 @@
 
         for (var i = 1; i < res.length; i++ ) {
             if ( res[i] !== undefined ) {
-                parsedData[ String(res[i]).substring(0,3) ] = res[i].substring(3).trim();             
+                parsedData[ String(res[i]).substring(0,3) ] = res[i].substring(3).trim();
             }
         }
 
@@ -388,7 +388,7 @@
             "cds_version": undefined,
             "jurisdiction_version": undefined,
             "postal_code": parsedData.DAK ? (parsedData.DAK.match(/\d{-}\d+/) ? parsedData.DAK : parsedData.DAK.substring(0,5)) : undefined,
-            "class": parsedData.DCA,
+            "klass": parsedData.DCA,
             "restrictions": undefined,
             "endorsments": undefined,
             "sex": function() {
@@ -425,4 +425,3 @@
   global.pdf417 = pdf417;
 
 }(this));
-
