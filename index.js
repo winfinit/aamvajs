@@ -68,6 +68,7 @@
             "jurisdiction_version": res3[2],
             "postal_code": res3[4],
             "klass": res3[5],
+            "class": res3[5],
             "restrictions": res3[6],
             "endorsments": res3[7],
             "sex": function() {
@@ -432,6 +433,7 @@
             "jurisdiction_version": undefined,
             "postal_code": parsedData.DAK ? (parsedData.DAK.match(/\d{-}\d+/) ? parsedData.DAK : parsedData.DAK.substring(0,5)) : undefined,
             "klass": parsedData.DCA,
+            "class": parsedData.DCA,
             "restrictions": undefined,
             "endorsments": undefined,
             "sex": function() {
