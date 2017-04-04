@@ -1,5 +1,3 @@
-[![Build Status](https://drone.io/github.com/winfinit/aamvajs/status.png)](https://drone.io/github.com/winfinit/aamvajs/latest)
-
 # aamva.js
 
 small helper library that provides one an ability to parse AAMVA magnetic stripe.
