@@ -39,9 +39,14 @@ describe('birthday', function() {
     });
 });
 
+describe('exp', function() {
+  it('should be ', function() {
+    expect(res.expiration_date).to.equal('20131107');
+  });
+});
+
 describe('postal_code', function() {
     it('should be 06109', function(){
         expect(res.postal_code).to.equal("06109");
     });
 });
-

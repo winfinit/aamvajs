@@ -49,8 +49,8 @@ and I would love to add support or fix things that are not working yet**
   console.log("DOB:",res2.birthday()); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */
   console.log("Entire object", res2);
 
-/* 
-  output: 
+/*
+  output:
         { state: 'FL',
           city: 'DELRAY BEACH',
           name: [Function],
@@ -64,6 +64,7 @@ and I would love to add support or fix things that are not working yet**
           jurisdiction_version: '!',
           postal_code: '33435      ',
           class: 'I ',
+          klass: 'I ', // same as 'class'
           restrictions: '          ',
           endorsments: '    ',
           sex: [Function],
