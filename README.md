@@ -63,7 +63,8 @@ and I would love to add support or fix things that are not working yet**
           cds_version: '#',
           jurisdiction_version: '!',
           postal_code: '33435      ',
-          klass: 'I ',
+          class: 'I ',
+          klass: 'I ', // same as 'class'
           restrictions: '          ',
           endorsments: '    ',
           sex: [Function],

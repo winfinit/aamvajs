@@ -17,7 +17,6 @@
 
     var parseDate = function(date) {
       var start = parseInt(date[0] + date[1]);
-      console.log('start', start);
       if (start < 13) {
         return date[4] + date[5] + date[6] + date[7] + date[0] + date[1] + date[2] + date[3];
       }
