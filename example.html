@@ -24,6 +24,11 @@
 					$('#city').html(output.city);
 					$('#state').html(output.state);
 					$('#zip').html(output.postal_code);
+					$('#exp').html(output.expiration_date);
+					var splitExp = splitDate(output.expiration_date);
+					$('#expm').html(splitExp.month);
+					$('#expd').html(splitExp.day);
+					$('#expy').html(splitExp.year);
 				});
 			});
 		</script>
@@ -47,7 +52,11 @@
 			<li>Address: <span id="address"/></li>
 			<li>City: <span id="city"/></li>
 			<li>State: <span id="state"/></li>
-			<li>zip: <span id="zip"/></li>
+			<li>Zip: <span id="zip"/></li>
+			<li>Exp Date: <span id="exp"/></li>
+			<li>Exp Month: <span id="expm"/></li>
+			<li>Exp Day: <span id="expd"/></li>
+			<li>Exp Year: <span id="expy"/></li>
 		</ul>
 
 		<hr/>

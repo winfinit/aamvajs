@@ -27,6 +27,14 @@
 
 	// splits dates into month, day, and year
     var splitDate = function(date) {
+	  if (date.length == 4) {
+		  // format is YYMM
+		  return {
+			  year: '20' + date[0] + date[1],
+			  month: date[2] + date[3],
+			  day: undefined
+		  }
+	  }
       var start = parseInt(date[0] + date[1]);
       if (start < 13) {
 		return {
