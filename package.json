@@ -1,15 +1,43 @@
 {
-  "name": "aamva",
-  "version": "1.1.0",
+  "_from": "aamva",
+  "_id": "aamva@1.2.0",
+  "_inBundle": false,
+  "_integrity": "sha1-a8MKXv+CFIOBY9B6oNYODV05cPc=",
+  "_location": "/aamva",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "aamva",
+    "name": "aamva",
+    "escapedName": "aamva",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/aamva/-/aamva-1.1.0.tgz",
+  "_shasum": "6bc30a5eff8214838163d07aa0d60e0d5d3970f7",
+  "_spec": "aamva",
+  "_where": "C:\\Users\\rpacetti",
+  "author": {
+    "name": "Roman Jurkov",
+    "email": "winfinit@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/winfinit/aamvajs/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
   "description": "Parse AAMVA magnetic stripe",
-  "main": "index.js",
-  "scripts": {
-    "test": "make test"
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/winfinit/aamvajs.git"
-  },
+  "homepage": "https://github.com/winfinit/aamvajs",
   "keywords": [
     "aamva",
     "driver",
@@ -17,17 +45,15 @@
     "AAMVA",
     "AMVA"
   ],
-  "author": "Roman Jurkov <winfinit@gmail.com>",
-  "license": "GNU General Public License",
-  "bugs": {
-    "url": "https://github.com/winfinit/aamvajs/issues"
+  "license": "GPL-3.0-or-later",
+  "main": "index.js",
+  "name": "aamva",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/winfinit/aamvajs.git"
   },
-  "dependencies": {
-    
+  "scripts": {
+    "test": "make test"
   },
-  "homepage": "https://github.com/winfinit/aamvajs",
-  "devDependencies": {
-    "mocha": "^1.21.4",
-    "chai": "^1.9.1"
-  }
+  "version": "1.2.0"
 }
