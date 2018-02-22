@@ -1,59 +1,74 @@
+<!DOCTYPE html>
 <html>
-
 	<head>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="./index.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#button').click(function() {
+					var version = pdf417version( $('#parse').val() );
+					$('#ver').html(version);
+					var output = parse( $('#parse').val() );
+					$('#dlid').html(output.id);
+					$('#name').html(output.name.first + " " + ( output.name.middle || "" ) + " " + output.name.last);
+					$('#fname').html(output.name.first);
+					$('#mname').html(output.name.middle);
+					$('#lname').html(output.name.last);
+					$('#sex').html(output.sex);
+					$('#dob').html(output.birthday);
+					var splitDob = splitDate(output.birthday);
+					$('#dobm').html(splitDob.month);
+					$('#dobd').html(splitDob.day);
+					$('#doby').html(splitDob.year);
+					$('#address').html(output.address);
+					$('#city').html(output.city);
+					$('#state').html(output.state);
+					$('#zip').html(output.postal_code);
+					$('#exp').html(output.expiration_date);
+					var splitExp = splitDate(output.expiration_date);
+					$('#expm').html(splitExp.month);
+					$('#expd').html(splitExp.day);
+					$('#expy').html(splitExp.year);
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<input type="text" id="parse">
-		<button onclick="parse_stripe()">Parse stripe</button>
-		<button onclick="parse_pdf417()">Parse pdf417</button>
+		<button id="button">Parse</button>
 		<pre id="output"></pre>
-                <ul>
-                    <li>ID: <span id="id"/></li>
-                    <li>Name: <span id="name"/></li>
-                    <li>Sex: <span id="sex"/></li>
-                    <li>DOB: <span id="dob"/></li>
-                    <li>Address: <span id="address"/></li>
-                    <li>City: <span id="city"/></li>
-                    <li>State: <span id="state"/></li>
-                    <li>zip: <span id="zip"/></li>
-                </ul>
+		<ul>
+			<li>Version: <span id="ver"/></li>
+			<li>ID: <span id="dlid"/></li>
+			<li>Name: <span id="name"/></li>
+			<li>First Name: <span id="fname"/></li>
+			<li>Middle Name: <span id="mname"/></li>
+			<li>Last Name: <span id="lname"/></li>
+			<li>Sex: <span id="sex"/></li>
+			<li>DOB: <span id="dob"/></li>
+			<li>DOB Month: <span id="dobm"/></li>
+			<li>DOB Day: <span id="dobd"/></li>
+			<li>DOB Year: <span id="doby"/></li>
+			<li>Address: <span id="address"/></li>
+			<li>City: <span id="city"/></li>
+			<li>State: <span id="state"/></li>
+			<li>Zip: <span id="zip"/></li>
+			<li>Exp Date: <span id="exp"/></li>
+			<li>Exp Month: <span id="expm"/></li>
+			<li>Exp Day: <span id="expd"/></li>
+			<li>Exp Year: <span id="expy"/></li>
+		</ul>
 
-                <hr/>
-                <h2>Sample data</h2>
-                <h4>Florida stripe</h4>
-                <pre>
+		<hr/>
+		<h2>Sample data</h2>
+		<h4>Florida stripe</h4>
+		<pre>
 %FLDELRAY DESERT^DOE$JOHN$^5929 N ROCK BLVD^                            ?;6360101062271087008=2101198799080=?#! 44556      I               1600                                   ECCECC00000?
-                </pre>
+		</pre>
 
-                <h4>Florida PDF417</h4>
-                <pre>
+		<h4>Florida PDF417</h4>
+		<pre>
 @ANSI 6360100102DL00390190ZF02290063DLDAADOE,JOHNDAG5929 N ROCK STDAIDELRAY SHOREDAJFLDAK44556-     DAQJ621625830080DARI   DAS          DAT     DBA20210108DBB19770204DBC1DBD20120612DBHN         DAU600ZFZFAREPLACED: 00000000ZFB ZFCP771206120090ZFD ZFE07-01-11
-                </pre>
-		<script>
-			function parse_stripe() {
-				var output = stripe( $('#parse').val() );
-                                $('#id').html(output.id());
-                                $('#name').html(output.name().first + " " + ( output.name().middle || "" ) + " " + output.name().last);
-                                $('#sex').html(output.sex());
-                                $('#dob').html((output.birthday().getUTCMonth() + 1) + "-" + output.birthday().getUTCDate() + "-" + output.birthday().getUTCFullYear());
-                                $('#address').html(output.address);
-                                $('#city').html(output.city);
-                                $('#state').html(output.state);
-                                $('#zip').html(output.postal_code);
-			}
-			function parse_pdf417() {
-				var output = pdf417( $('#parse').val() );
-                                $('#id').html(output.id());
-                                $('#name').html(output.name().first + " " + ( output.name().middle || "" ) + " " + output.name().last);
-                                $('#sex').html(output.sex());
-                                $('#dob').html((output.birthday().getUTCMonth()) + "-" + output.birthday().getUTCDate() + "-" + output.birthday().getUTCFullYear());
-                                $('#address').html(output.address);
-                                $('#city').html(output.city);
-                                $('#state').html(output.state);
-                                $('#zip').html(output.postal_code);
-			}
-		</script>
+		</pre>
 	</body>
 </html>

@@ -1,3 +1,5 @@
+[![Build Status](https://drone.io/github.com/winfinit/aamvajs/status.png)](https://drone.io/github.com/winfinit/aamvajs/latest)
+
 # aamva.js
 
 small helper library that provides one an ability to parse AAMVA magnetic stripe.
@@ -30,21 +32,21 @@ and I would love to add support or fix things that are not working yet**
   ';
 
   var res = aamva.stripe(stripe_data);
-  console.log("DMV ID:",res.id()); /* D621720820090 */
-  console.log("First name:",res.name().first); /* JOHN */
-  console.log("Last name:",res.name().last); /* DOE */
-  console.log("Middle name:",res.name().middle); /* "" */
-  console.log("Sex:",res.sex()); /* MALE, FEMALE, MISSING/INVALID */
-  console.log("DOB:",res.birthday()); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */
+  console.log("DMV ID:",res.id); /* D621720820090 */
+  console.log("First name:",res.name.first); /* JOHN */
+  console.log("Last name:",res.name.last); /* DOE */
+  console.log("Middle name:",res.name.middle); /* "" */
+  console.log("Sex:",res.sex); /* MALE, FEMALE, MISSING/INVALID */
+  console.log("DOB:",res.birthday); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */
   console.log("Entire object", res);
 
   var res2 = aamva.pdf417(barcode_data);
-  console.log("DMV ID:",res2.id()); /* D621720820090 */
-  console.log("First name:",res2.name().first); /* JOHN */
-  console.log("Last name:",res2.name().last); /* DOE */
-  console.log("Middle name:",res2.name().middle); /* "" */
-  console.log("Sex:",res2.sex()); /* MALE, FEMALE, MISSING/INVALID */
-  console.log("DOB:",res2.birthday()); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */
+  console.log("DMV ID:",res2.id); /* D621720820090 */
+  console.log("First name:",res2.name.first); /* JOHN */
+  console.log("Last name:",res2.name.last); /* DOE */
+  console.log("Middle name:",res2.name.middle); /* "" */
+  console.log("Sex:",res2.sex); /* MALE, FEMALE, MISSING/INVALID */
+  console.log("DOB:",res2.birthday); /* Thu Jan 08 1987 00:00:00 GMT-0500 (EST) */
   console.log("Entire object", res2);
 
 /*
@@ -100,6 +102,7 @@ If you find a bug or willing to add some enhancement, pull requests are very wel
 * 0.0.12 fixed duplicate name key
 * 0.0.13 added pdf417 support, added example page, and changed plugin to be compatible with browser
 * 0.0.16 fixed version regex for pdf417, and added MD tests.
+* 1.2.0 added all current versions, version and date parsing functions, updated example
 
 
 ## Legal
