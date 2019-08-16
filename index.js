@@ -302,7 +302,9 @@
             );
             break;
           }
-          /* version 04 */
+          /* version 04 year 2009 */
+          /* PDF: https://www.aamva.org/WorkArea/DownloadAsset.aspx?id=754 */
+          /* field reference begins on page 49 */
           case 4:
           /* version 07 year 2012 */
           case 7: {
