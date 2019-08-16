@@ -302,6 +302,8 @@
             );
             break;
           }
+          /* version 04 */
+          case 4:
           /* version 07 year 2012 */
           case 7: {
               parseRegex = new RegExp(
