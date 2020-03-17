@@ -44,11 +44,14 @@
                                 $('#zip').html(output.postal_code);
 			}
 			function parse_pdf417() {
-				var output = pdf417( $('#parse').val() );
-                                $('#id').html(output.id());
-                                $('#name').html(output.name().first + " " + ( output.name().middle || "" ) + " " + output.name().last);
-                                $('#sex').html(output.sex());
-                                $('#dob').html((output.birthday().getUTCMonth()) + "-" + output.birthday().getUTCDate() + "-" + output.birthday().getUTCFullYear());
+                                var output = pdf417( $('#parse').val() );
+                                var birthday = output.birthday.substring(0,2) == 19 || output.birthday.substring(0,2) == 20
+                                        ? new Date(output.birthday.substring(0,4), output.birthday.substring(4,6), output.birthday.substring(6,8))
+                                        : new Date(output.birthday.substring(0,2), output.birthday.substring(2,4), output.birthday.substring(4,8));
+                                $('#id').html(output.id);
+                                $('#name').html(output.name.first + " " + ( output.name.middle || "" ) + " " + output.name.last);
+                                $('#sex').html(output.sex);
+                                $('#dob').html(`${birthday.getFullYear()}-${birthday.getMonth()}-${birthday.getDate()}`);
                                 $('#address').html(output.address);
                                 $('#city').html(output.city);
                                 $('#state').html(output.state);
