@@ -361,6 +361,80 @@
               );
               break;
           }
+          case 8:
+          case 9: {
+            var prefixes = [
+                'DCA', // jurisdiction vehicle class
+                'DCB', // jurisdiction restriction codes
+                'DCD', // jurisdiction endorsement codes
+                'DBA', // doc. expiration date
+                'DCS', // customer family name
+                'DAC', // first name
+                'DAD', // middle names (comma seperated)
+                'DBD', // doc. issue date
+                'DBB', // date of birth (MMDDCCYY for U.S., CCYYMMDD for Canada)
+                'DBC', // gender (1-name, 2-female, 9-not specified)
+                'DAY', // eye color (ansi d-20 codes)
+                'DAU', // height
+                'DAG', // street 1
+                'DAI', // city
+                'DAJ', // state
+                'DAK', // zip
+                'DAQ', // customer id number
+                'DCF', // doc. distriminator
+                'DCG', // country identification (USA/CAN)
+                'DDE', // last name truncated (T-trucated, N-not, U-unknown)
+                'DDF', // first name truncated (T-trucated, N-not, U-unknown)
+                'DDG', // middle name truncated (T-trucated, N-not, U-unknown)
+                // optionals
+                'DAH', // street address line 2
+                'DAZ', // hair color
+                'DCI', // place of birth
+                'DCJ', // audit info
+                'DCK', // inventory control number
+                'DBN', // alias last name
+                'DBG', // alias first name
+                'DBS', // aliast suffix name
+                'DCU', // name suffix . (JR, SR, 1ST, 2ND...)
+                'DCE', // weight range
+                'DCL', // race / ethnicity (AAMVA D20 code)
+                'DCM', // vehicle classification
+                'DCN', // standard endorsement code
+                'DCO', // standard restriction code
+                'DCP', // vehicle classification description
+                'DCQ', // endorsement code description
+                'DCR', // restriction code description
+                'DDA', // compliance type
+                'DDB', // card revision date
+                'DDC', // hazmat endorsement exp. date
+                'DDD', // limited duration doc. indicator
+                'DAW', // weight lbs
+                'DAX', // weight kg
+                'DDH', // under 18 until, date turns 18 (MMDDCCYY for U.S., CCYYMMDD for Canada)
+                'DDI', // under 19 until, date turns 19 (MMDDCCYY for U.S., CCYYMMDD for Canada)
+                'DDJ', // under 21 until, date turns 21 (MMDDCCYY for U.S., CCYYMMDD for Canada)
+                'DDK', // organ donor (1-yes)
+                'DDL' // veteran indicator (1-yes)
+            ];
+            var regExStr = '';
+            var prefixIdxs = [];
+            for (var i = 0; i < prefixes.length; i++) {
+                var idx = data.indexOf(prefixes[i]);
+                if (idx !== -1) {
+                    prefixIdxs.push({
+                        prefix: prefixes[i],
+                        index: idx
+                    });
+                }
+            }
+            // if prefixes are not in order as found in the string, the regex will not perform as expected
+            prefixIdxs.sort((a,b) => (a.index > b.index) ? 1 : -1);
+            prefixIdxs.forEach(obj => regExStr += `(${obj.prefix}.*?)?`);
+            regExStr += '$';
+
+            parseRegex = new RegExp(regExStr);
+            break;
+          }
           default: {
               console.log('unable to get version', version);
               // probably not a right parse...
