@@ -107,14 +107,15 @@
     };
 
     var pdf417 = function(data) {
-        data = data.replace(/\n/, "");
+        if (data.indexOf('\n') > -1) {
+            data = data.split('\n')[1];
+            data = data.replace(/\n/, "");
+        }
         // replace spaces with regular space
         data = data.replace(/\s/g, " ");
 
         // get version of aamva (before 2000 or after)
         var version = data.match(/[A-Z ]{5}\d{6}(\d{2})/);
-
-
 
         var parseRegex;
 
@@ -361,6 +362,7 @@
               );
               break;
           }
+          case 4:
           case 8:
           case 9: {
             var prefixes = [
@@ -444,9 +446,12 @@
         var parsedData = {};
         var res = data.match(parseRegex);
 
-        for (var i = 1; i < res.length; i++ ) {
+        for ( var i = 1; i < res.length; i++ ) {
             if ( res[i] !== undefined ) {
-                parsedData[ String(res[i]).substring(0,3) ] = res[i].substring(3).trim();
+                var str = res[i].substring(3).trim();
+                if (str[str.length-1] === ".")
+                    str = str.substring(0,str.length-1);
+                parsedData[ String(res[i]).substring(0,3) ] = str;
             }
         }
 
@@ -481,6 +486,8 @@
                 break;
             }
         };
+
+        console.log(parsedData);
 
         var rawData = {
             "state": parsedData.DAJ,

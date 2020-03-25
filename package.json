@@ -22,12 +22,10 @@
   "bugs": {
     "url": "https://github.com/winfinit/aamvajs/issues"
   },
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "homepage": "https://github.com/winfinit/aamvajs",
   "devDependencies": {
-    "mocha": "^1.21.4",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "mocha": "^1.21.5"
   }
 }
