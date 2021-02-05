@@ -18,13 +18,11 @@
     "AMVA"
   ],
   "author": "Roman Jurkov <winfinit@gmail.com>",
-  "license": "GNU General Public License",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/winfinit/aamvajs/issues"
   },
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "homepage": "https://github.com/winfinit/aamvajs",
   "devDependencies": {
     "mocha": "^1.21.4",
