@@ -26,6 +26,6 @@
   "homepage": "https://github.com/winfinit/aamvajs",
   "devDependencies": {
     "chai": "^1.9.1",
-    "mocha": "^8.2.1"
+    "mocha": "^10.1.0"
   }
 }
